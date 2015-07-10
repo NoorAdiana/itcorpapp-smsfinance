@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 </head>
-<body class="skin-blue sidebar-mini">
+<body class="skin-black sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">

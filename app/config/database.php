@@ -64,7 +64,7 @@ $query_builder = TRUE;
 
 $db['ITCORPDB'] = array(
 	'dsn'	=> '',
-	'hostname' => 'ITCORPDB',
+	'hostname' => 'Driver={SQL Server};Server=127.0.0.1;Database=ITCORPDB; Uid=sa;Pwd=sPassword123;',
 	'username' => 'sa',
 	'password' => 'Password123',
 	'database' => 'ITCORPDB',

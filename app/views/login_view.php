@@ -48,8 +48,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="input-group <?php if ($status == 'Failed') {
                         echo 'has-error';
                     } ?>">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <select class="form-control" name="pilih_app" id="pilih_app">
+                            <option value="0">Pilih Applikasi</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Daily Jobs</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group <?php if ($status == 'Failed') {
+                        echo 'has-error';
+                    } ?>">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="User"
+                        <input id="user" type="text" class="form-control" name="user" placeholder="User"
                                value="<?php echo $input_username; ?>" required="required">
                     </div>
 

@@ -22,6 +22,16 @@ class Users_models extends CI_Model
         return $query->result_array();
     }
 
+        function get_secret_key($username)
+    {
+        $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
+        $query_string = "exec spGetSecretKey '".$username."'";
+        $ITCORPDB->query('SET ANSI_NULLS ON;');
+        $ITCORPDB->query('SET ANSI_WARNINGS ON;');
+        $query = $ITCORPDB->query($query_string);
+        return $query->result_array();
+    }
+
     function import_user($nomor_induk, $email, $save_password, $user_import, $secret_key, $type)
     {
         $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
