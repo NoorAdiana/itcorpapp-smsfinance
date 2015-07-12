@@ -22,4 +22,14 @@ class Login_models extends CI_Model
         $query = $ITCORPDB->query($query_string);
         return $query->result_array();
     }
+
+    function get_app()
+    {
+        $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
+        $query_string = "exec getApp";
+        $ITCORPDB->query('SET ANSI_NULLS ON;');
+        $ITCORPDB->query('SET ANSI_WARNINGS ON;');
+        $query = $ITCORPDB->query($query_string);
+        return $query->result_array();
+    }
 }

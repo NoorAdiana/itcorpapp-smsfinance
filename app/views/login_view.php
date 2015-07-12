@@ -52,7 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <select class="form-control" name="pilih_app" id="pilih_app">
                             <option value="0">Pilih Applikasi</option>
                             <option value="1">Admin</option>
-                            <option value="2">Daily Jobs</option>
+                            <?php for($i = 0; $i < sizeof($app); $i++):?>
+                                <option value="<?php echo $app[$i]['ID']?>"><?php echo $app[$i]['Description']?></option>
+                            <?php endfor; ?>
                         </select>
                     </div>
 
