@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <a href="#" class="btn btn-default btn-flat" disabled="disabled">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="<?php echo base_url('welcome/logout')?>" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -107,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php $child_menu = $menu[$i]['ChildMenu']; ?>
                     <?php if ($menu[$i]['ChildMenu'] == '0') { ?>
                         <li>
-                            <a href="<?php echo $menu[$i]['MenuUrl'] ?>">
+                            <a href="<?php echo $menu[$i]['MenuUrl'] ?>" target="iframe_app">
                                 <i class="fa fa-bars"></i> <span><?php echo $menu[$i]['MenuName'] ?></span>
                             </a>
                         </li>

@@ -106,13 +106,15 @@ class Welcome extends CI_Controller
             $parent_menu = $this->menu_models->get_parent_menu('TKT');
 
             for($i = 0; $i < sizeof($parent_menu); $i++){
-                $child_menu = $this->menu_models->get_child_menu($parent_menu[$i]['MenuParent']);
+                $child_menu = $this->menu_models->get_child_menu($parent_menu[$i]['MenuParentId']);
                 if($parent_menu[$i]['MenuParentId'] !== '0'){
                     $parent_menu[$i]['ChildMenu'] = $child_menu;
                 }else{
                     $parent_menu[$i]['ChildMenu'] = 0;
                 }
             }
+
+            $data['menu'] = $parent_menu;
         }else {
             redirect(base_url('error/error_404'), 'refresh');
         }
@@ -294,21 +296,22 @@ class Welcome extends CI_Controller
                         'email' => $login_info[0]['Email'],
                         'cabang' => $login_info[0]['Cabang'],
                         'divisi' => $login_info[0]['Divisi'],
-                        'secret_key' => $login_info[0]['SecretKey']
+                        'secret_key' => $login_info[0]['SecretKey'],
+                        'group_user' => $login_info[0]['GroupUser']
                     );
 
                     $this->session->set_userdata($session_data);
 
                     if ($password === $login_info[0]['Password']) {
-                        if($app === '1' && $login_info[0]['IsAdminAccess'] === '1'){
+                        if($app === '1' && $login_info[0]['IsAdmin'] === '1'){
                             redirect(base_url('welcome?app=admin'), 'refresh');
-                        }elseif($app === 'TKT' && $login_info[0]['IsTicketAccess'] === '1'){
+                        }elseif($app === 'TKT' && $login_info[0]['IsTicket'] === '1'){
                             redirect(base_url('welcome?app=tkt'), 'refresh');
-                        }elseif($app === 'TSK' && $login_info[0]['IsTasklogAccess'] === '1'){
+                        }elseif($app === 'TSK' && $login_info[0]['IsTasklog'] === '1'){
                             redirect(base_url('welcome?app=tsk'), 'refresh');
-                        }elseif($app === 'MTR' && $login_info[0]['IsMonitoringAccess'] === '1'){
+                        }elseif($app === 'MTR' && $login_info[0]['IsMonitoring'] === '1'){
                             redirect(base_url('welcome?app=mtr'), 'refresh');
-                        }elseif($app === 'DJB' && $login_info[0]['IsDailyJobsAccess'] === '1'){
+                        }elseif($app === 'DJB' && $login_info[0]['IsDailyJobs'] === '1'){
                             redirect(base_url('welcome?app=djb'), 'refresh');
                         }else{
                             $data['status'] = 'Failed';
