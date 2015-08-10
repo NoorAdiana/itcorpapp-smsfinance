@@ -28,6 +28,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-sm-9">
                             <select name="input_type_ticket" id="input_type_ticket" class="form-control">
                                 <option value="0">Pilih Type Ticket Disini</option>
+                                <option value="P">Problem</option>
+                                <option value="R">Request</option>
                             </select>
                         </div>
                     </div>
@@ -105,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="reset" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
                         </div>
                     </div>
                 </form>
@@ -120,10 +122,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         type="text/javascript"></script>
 
 <script>
-    $(document).ready(function(){
-        getTypeTicket();
-    });
-
     $("#upload_gambar").on("click", function () {
         if (document.getElementById('upload_gambar').checked) {
             $(":file").filestyle('disabled', false);
@@ -131,15 +129,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $(":file").filestyle('disabled', true);
         }
     });
-
-    function getTypeTicket(){
-        $(document).ready(function(){
-            $.post("<?php echo base_url('admin/ticket/new_ticket/get_type_ticket')?>",
-                function (data, status) {
-                    $("#input_subject_ticket").val(data[0].KategoriID);
-                });
-        }
-    }
 </script>
 </body>
 </html>
