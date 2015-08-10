@@ -121,7 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <ul class="treeview-menu">
                                 <li>
                                     <?php for($j = 0; $j < sizeof($child_menu); $j++):?>
-                                        <a href="#"><i class="fa fa-circle-o"></i>
+                                        <a href="<?php echo base_url($child_menu[$j]['MenuUrl'])?>" target="iframe_app"><i class="fa fa-circle-o"></i>
                                             <?php echo $child_menu[$j]['MenuName'] ?>
                                         </a>
                                     <?php endfor; ?>
