@@ -49,6 +49,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <div class="col-md-2"></div>
             </row>
+
+            <div class="col-sm-12">
+                <?php if(sizeof($list_file) >= 1) :?>
+                    <row>
+                        <div class="panel panel-default">
+                            <table class="table table-hover" id="daftar_user">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">NAMA FILE</th>
+                                    <th class="text-center">JENIS UPLOAD</th>
+                                    <th class="text-center">UPLOAD FILE</th>
+                                    <th class="text-center">USER UPLOAD</th>
+                                    <th class="text-center">TANGGAL UPLOAD</th>
+                                    <th class="text-center">ACTION</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php for ($i = 0; $i < sizeof($list_file); $i++): ?>
+                                    <tr>
+                                        <td class="text-center"><?php echo $i + 1 ?></td>
+                                        <td class="text-center"><?php echo $list_file[$i]['NamaFile']; ?></td>
+                                        <td class="text-center"><?php echo $list_file[$i]['UploadType']; ?></td>
+                                        <td class="text-center"><?php echo $list_file[$i]['UploadFile']; ?></td>
+                                        <td class="text-center"><?php echo $list_file[$i]['UserFullName']; ?></td>
+                                        <td class="text-center"><?php echo $list_file[$i]['DtmUpload']; ?></td>
+                                        <td class="text-center">
+                                            <form method="post" action="<?php echo base_url('virtual/generate_file/convert'); ?>">
+                                                <input type="hidden" id="id_file" name="id_file"
+                                                       value="<?php echo $list_file[$i]['ID']; ?>">
+                                                <input type="hidden" id="type_upload" name="type_upload"
+                                                       value="<?php echo $list_file[$i]['UploadType']; ?>">
+                                                <button type="submit" class="btn btn-primary btn-xs">Convert</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endfor; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </row>
+                <?php endif;?>
+            </div>
         </section>
     </div>
 </div>
