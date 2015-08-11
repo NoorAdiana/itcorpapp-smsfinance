@@ -120,9 +120,9 @@ class Generate_file extends CI_Controller
             $file_download_path = '';
 
             if($type_upload == 'MDR'){
-                $file_download_path = getcwd() . '/downloads/virtual/mandiri/CONVERT_MANDIRI_'.date("Ymdhis").'.txt';
+                $file_download_path = getcwd() . '/downloads/virtual/convert/mandiri/CONVERT_MANDIRI_'.date("Ymdhis").'.txt';
             }else{
-                $file_download_path = getcwd() . '/downloads/virtual/bri/CONVERT_BRIVA_'.date("Ymdhis").'.txt';
+                $file_download_path = getcwd() . '/downloads/virtual/convert/bri/CONVERT_BRIVA_'.date("Ymdhis").'.txt';
             }
 
             $file_download = fopen($file_download_path, 'w');

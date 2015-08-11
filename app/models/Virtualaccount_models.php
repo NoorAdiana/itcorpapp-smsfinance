@@ -57,4 +57,48 @@ class Virtualaccount_models extends CI_Model
         $query = $ITCORPDB->query($query_string);
         return $query->result_array();
     }
+
+    function get_penutupan_bca($start_date, $end_date)
+    {
+        $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
+        $query_string = "EXEC spGetPenutupanVirtualAccBCA @StartDate = '".$start_date."', @EndDate = '".$end_date."'";
+
+        $ITCORPDB->query('SET ANSI_NULLS ON;');
+        $ITCORPDB->query('SET ANSI_WARNINGS ON;');
+        $query = $ITCORPDB->query($query_string);
+        return $query->result_array();
+    }
+
+    function get_penutupan_mandiri($start_date, $end_date)
+    {
+        $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
+        $query_string = "EXEC spGetPenutupanVirtualAccMandiri @StartDate = '".$start_date."', @EndDate = '".$end_date."'";
+
+        $ITCORPDB->query('SET ANSI_NULLS ON;');
+        $ITCORPDB->query('SET ANSI_WARNINGS ON;');
+        $query = $ITCORPDB->query($query_string);
+        return $query->result_array();
+    }
+
+    function get_penutupan_briva($start_date, $end_date)
+    {
+        $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
+        $query_string = "EXEC spGetPenutupanVirtualAccBCA @StartDate = '".$start_date."', @EndDate = '".$end_date."'";
+
+        $ITCORPDB->query('SET ANSI_NULLS ON;');
+        $ITCORPDB->query('SET ANSI_WARNINGS ON;');
+        $query = $ITCORPDB->query($query_string);
+        return $query->result_array();
+    }
+
+    function get_pembukaan_briva($start_date, $end_date)
+    {
+        $ITCORPDB = $this->load->database('ITCORPDB', TRUE);
+        $query_string = "EXEC spGetPenutupanVirtualAccBCA @StartDate = '".$start_date."', @EndDate = '".$end_date."'";
+
+        $ITCORPDB->query('SET ANSI_NULLS ON;');
+        $ITCORPDB->query('SET ANSI_WARNINGS ON;');
+        $query = $ITCORPDB->query($query_string);
+        return $query->result_array();
+    }
 }
