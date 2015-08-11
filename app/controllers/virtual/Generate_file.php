@@ -60,8 +60,10 @@ class Generate_file extends CI_Controller
 
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload()) {
-                $error = array('error' => $this->upload->display_errors());
-                print_r($error);
+                $data['status'] = 'Error';
+                $data['pesan'] = $this->upload->display_errors();
+
+                $this->load->view('virtual/generate_file', $data);
             } else {
                 $upload = array('upload_data' => $this->upload->data());
                 $insert_result = $this->upload_models->upload_file($upload['upload_data'], $this->session->userdata('username'), $pilihan_bank);

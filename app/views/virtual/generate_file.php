@@ -20,6 +20,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </section>
         <section class="content">
             <row>
+                <?php if ($status == 'Error' || $status == 'Failed'){ ?>
+                    <row>
+                        <div class="alert alert-danger" role="alert"><?php echo $pesan ?></div>
+                    </row>
+                <?php } ?>
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <form class="form-horizontal" action="<?php echo base_url('virtual/generate_file/upload_file')?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
