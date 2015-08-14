@@ -61,15 +61,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="panel panel-default">
                             <table class="table table-hover" id="daftar_user">
                                 <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th class="text-center">NAMA FILE</th>
-                                    <th class="text-center">JENIS UPLOAD</th>
-                                    <th class="text-center">UPLOAD FILE</th>
-                                    <th class="text-center">USER UPLOAD</th>
-                                    <th class="text-center">TANGGAL UPLOAD</th>
-                                    <th class="text-center">ACTION</th>
-                                </tr>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">NAMA FILE</th>
+                                        <th class="text-center">JENIS UPLOAD</th>
+                                        <th class="text-center">UPLOAD FILE</th>
+                                        <th class="text-center">USER UPLOAD</th>
+                                        <th class="text-center">TANGGAL UPLOAD</th>
+                                        <th class="text-center">ACTION</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <?php for ($i = 0; $i < sizeof($list_file); $i++): ?>

@@ -29,6 +29,7 @@ class Pembukaan extends CI_Controller
 
     public function export()
     {
+        date_default_timezone_set("Asia/Jakarta");
         $data = array(
             'header' => 'Pembukaan Virtual Account',
             'status' => '',
@@ -50,10 +51,16 @@ class Pembukaan extends CI_Controller
             }else{
                 if($bank === 'BRI'){
                     $this->load->model('virtualaccount_models');
-                    $pembukaan_briva = $this->virtualaccount_models->get_pembukaan_briva($start_date, $end_date);
+                    $pembukaan_briva = $this->virtualaccount_models->get_pembukaan_briva($start_date, $end_date, $this->session->userdata('username'));
 
                     $file_download_path = getcwd() . '/downloads/virtual/convert/mandiri/PEMBUKAAN_BRIVA_'.$start_date.'_'.$end_date.'_'.date("Ymdhis").'.csv';
-                
+
+                    $file_download = fopen($file_download_path, 'w');
+                    for($i = 0; $i < sizeof($pembukaan_briva); $i++){
+                        fwrite($file_download, $pembukaan_briva[$i]['Pembukaan']."\r\n");
+                    }
+                    fclose($file_download_path);
+                    force_download($file_download_path, NULL);
                 }
             }
         }

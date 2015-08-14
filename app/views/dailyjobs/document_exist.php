@@ -20,71 +20,73 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </section>
         <section class="content">
             <row>
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <form class="form-inline" method="get" action="">
+                <?php if ($status == 'Error' || $status == 'Failed') { ?>
+                    <row>
+                        <div class="alert alert-danger" role="alert"><?php echo $pesan ?></div>
+                    </row>
+                <?php } ?>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <form class="form-inline" action="<?php echo base_url('dailyjobs/document_exist')?>" method="get" accept-charset="utf-8">
                         <div class="form-group">
                             <div class="form-group">
-                                <strong class="form-control-static">Cari Karyawan</strong>
+                                <strong class="form-control-static">Nomor Dokumen</strong>
                             </div>
-                            <select name="pilihan_search" class="form-control">
-                                <option value="1">Nomor Induk Karyawan</option>
-                                <option value="2">Nama Karyawan</option>
-                            </select>
-                            <input type="hidden" class="form-control" id="action" name="action" value="cari">
-                            <input type="text" class="form-control" id="kataKunci" name="kata_kunci"
-                                   required="required">
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="kata_kunci" name="kata_kunci"
+                                   required="required">
+                            <input type="hidden" class="form-control" id="action" name="action"
+                                   required="required" value="cari">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
                     </form>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-3"></div>
             </row>
             <br><br><br>
-            <?php if ($daftar_user !== ''): ?>
+
+            <div class="col-sm-12">
                 <row>
-                    <div class="panel panel-default">
-                        <table class="table table-hover" id="daftar_user">
-                            <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">NIP</th>
-                                <th class="text-center">NAMA</th>
-                                <th class="text-center">CABANG</th>
-                                <th class="text-center">DIVISI</th>
-                                <th class="text-center">STATUS</th>
-                                <th class="text-center">ACTION</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php for ($i = 0; $i < sizeof($daftar_user); $i++): ?>
+                    <?php if ($daftar_document !== ''): ?>
+                        <div class="panel panel-default">
+                            <table class="table table-hover" id="daftar_user">
+                                <thead>
                                 <tr>
-                                    <td class="text-center"><?php echo $i + 1 ?></td>
-                                    <td class="text-center"><?php echo $daftar_user[$i]['Username']; ?></td>
-                                    <td class="text-center"><?php echo $daftar_user[$i]['UserFullName']; ?></td>
-                                    <td class="text-center"><?php echo $daftar_user[$i]['Cabang']; ?></td>
-                                    <td class="text-center"><?php echo $daftar_user[$i]['Divisi']; ?></td>
-                                    <td class="text-center"><?php if($daftar_user[$i]['IsActive'] == '1') {
-                                            echo 'Active';
-                                        } else {
-                                            echo 'Non Active';
-                                        } ?></td>
-                                    <td class="text-center">
-                                        <form method="post" action="<?php echo base_url('admin/users/detail_user'); ?>">
-                                            <input type="hidden" id="action" name="action" value="detail_user">
-                                            <input type="hidden" id="pilihan_search" name="pilihan_search" value="1">
-                                            <input type="hidden" id="kata_kunci" name="kata_kunci"
-                                                   value="<?php echo $daftar_user[$i]['Username']; ?>">
-                                            <button type="submit" class="btn btn-primary btn-xs">Detail</button>
-                                        </form>
-                                    </td>
+                                    <th class="text-center">Cabang</th>
+                                    <th class="text-center">Nama Konsumen</th>
+                                    <th class="text-center">Nomor Kontrak</th>
+                                    <th class="text-center">Jenis Dokumen</th>
+                                    <th class="text-center">Nomor Dokumen</th>
+                                    <th class="text-center">Kontrak Status</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
-                            <?php endfor; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    <?php for ($i = 0; $i < sizeof($daftar_document); $i++): ?>
+                                        <tr>
+                                            <td class="text-center"><?php echo $daftar_document[$i]['BranchFullName']?></td>
+                                            <td class="text-center"><?php echo $daftar_document[$i]['Name']?></td>
+                                            <td class="text-center"><?php echo $daftar_document[$i]['AgreementNo']?></td>
+                                            <td class="text-center"><?php echo $daftar_document[$i]['AssetDocID']?></td>
+                                            <td class="text-center"><?php echo $daftar_document[$i]['DocumentNo']?></td>
+                                            <td class="text-center"><?php echo $daftar_document[$i]['ContractStatus']?></td>
+                                            <td class="text-center">
+                                                <form action="<?php echo base_url('dailyjobs/document_exist/detail')?>"
+                                                      onSubmit="openPopsUpForm(this, 'join')">
+                                                    <input type="hidden" value="<?php echo $daftar_document[$i]['ApplicationID']?>" name="application_id"
+                                                           id="application_id">
+                                                    <button type="submit" class="btn btn-primary btn-xs">Detail</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endfor; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
                 </row>
-            <?php endif; ?>
+            </div>
         </section>
     </div>
 </div>
@@ -108,6 +110,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             "autoWidth": true
         });
     });
+
+    function openPopsUp() {
+        window.open("<?php echo base_url('ticket/detail?nomor_ticket=401-00001')?>",
+            "_blank",
+            "top=50, left=250, width=800, height=600");
+    }
+
+    function openPopsUpForm(myform, windowname) {
+        var strWindowFeatures = "resizable=no, scrollbars=yes, top=50, left=250, width=800, height=550";
+        if (!window.focus) return true;
+        window.open('', windowname, strWindowFeatures);
+        myform.target = windowname;
+        return true;
+    }
 </script>
 </body>
 </html>

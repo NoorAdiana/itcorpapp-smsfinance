@@ -37,9 +37,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-sm-8">
                                 <select name="pilihan_bank" id="pilihan_bank" class="form-control">
                                     <option value="0">Pilih Nama Bank Disini</option>
-                                    <option value="BRI">Bank Rakyat Indonesia</option>
-                                    <option value="MDR">Bank Mandiri</option>
                                     <option value="BCA">Bank Central Asia</option>
+                                    <option value="MDR">Bank Mandiri</option>
+                                    <option value="BRI">Bank Rakyat Indonesia</option>
                                 </select>
                             </div>
                         </div>

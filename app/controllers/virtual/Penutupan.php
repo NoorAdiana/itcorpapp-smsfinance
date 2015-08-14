@@ -29,6 +29,8 @@ class Penutupan extends CI_Controller
 
     public function export()
     {
+        date_default_timezone_set("Asia/Jakarta");
+
         $data = array(
             'header' => 'Penutupan Virtual Account',
             'status' => '',
@@ -48,12 +50,42 @@ class Penutupan extends CI_Controller
                 $data['pesan'] = 'Mohon untuk memilih nama bank';
                 $this->load->view('virtual/pembukaan', $data);
             }else{
-                if($bank === 'BRI'){
+                if($bank === 'MDR'){
                     $this->load->model('virtualaccount_models');
-                    $pembukaan_briva = $this->virtualaccount_models->get_pembukaan_briva($start_date, $end_date);
+                    $penutupan = $this->virtualaccount_models->get_penutupan_mandiri($start_date, $end_date);
 
-                    $file_download_path = getcwd() . '/downloads/virtual/convert/mandiri/PEMBUKAAN_BRIVA_'.$start_date.'_'.$end_date.'_'.date("Ymdhis").'.csv';
-                
+                    $file_download_path = getcwd() . '/downloads/virtual/penutupan/mandiri/UPLDREQ_'.date("Ymd").'_'.date("his").'_MANDIRI_PENUTUPAN.txt';
+
+                    $file = fopen($file_download_path, 'w');
+                    for($i = 0; $i < sizeof($penutupan); $i++){
+                        fwrite($file, $penutupan[$i]['Penutupan']."\r\n");
+                    }
+                    fclose($file_download_path);
+                    force_download($file_download_path, NULL);
+                }if($bank === 'BCA'){
+                    $this->load->model('virtualaccount_models');
+                    $penutupan = $this->virtualaccount_models->get_penutupan_bca($start_date, $end_date);
+
+                    $file_download_path = getcwd() . '/downloads/virtual/penutupan/bca/UPLDREQ_'.date("Ymd").'_'.date("his").'_BCA.txt';
+
+                    $file = fopen($file_download_path, 'w');
+                    for($i = 0; $i < sizeof($penutupan); $i++){
+                        fwrite($file, $penutupan[$i]['Penutupan']."\r\n");
+                    }
+                    fclose($file_download_path);
+                    force_download($file_download_path, NULL);
+                }if($bank === 'BRI'){
+                    $this->load->model('virtualaccount_models');
+                    $penutupan = $this->virtualaccount_models->get_penutupan_briva($start_date, $end_date, $this->session->userdata('username'));
+
+                    $file_download_path = getcwd() . '/downloads/virtual/penutupan/bri/UPLDREQ_'.date("Ymd").'_'.date("his").'_BRI.csv';
+
+                    $file = fopen($file_download_path, 'w');
+                    for($i = 0; $i < sizeof($penutupan); $i++){
+                        fwrite($file, $penutupan[$i]['Penutupan']."\r\n");
+                    }
+                    fclose($file_download_path);
+                    force_download($file_download_path, NULL);
                 }
             }
         }
